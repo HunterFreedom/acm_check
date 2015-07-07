@@ -1,0 +1,40 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+const int maxn = 80 + 5;
+char s[maxn];
+
+int main() {
+	int T;
+	cin >> T;
+//	cout << endl;
+	while(T--) {
+		memset(s, '\0', sizeof(s));
+		cin >> s;
+//		cout << endl;
+		int len = strlen(s);
+		int _false = 0;
+		int p = 0;
+		for(int i = 0; i < len; i++) {
+			_false = 0;
+			p = i+1;
+			int cn = len/p;  //循环判断cn次
+			if(!(len%p)) {  //可能以p为周期
+				for(int j = 0; j < cn; j++) {
+					for(int k = 0; k < p; k++)
+						if(s[k] != s[k+j*p]) {
+							_false = 1;
+							break;
+						}
+					if(_false) break;
+				}
+			}
+			else _false = 1;
+			if(_false) continue;
+			else break;
+		}
+		if(!_false) cout << p << endl ;
+		if(T) cout << endl;
+	}
+	return 0;
+}
